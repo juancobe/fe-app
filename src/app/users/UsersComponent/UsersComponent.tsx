@@ -2,8 +2,6 @@
 
 import { Dispatch, SetStateAction, createContext, useState } from "react"
 import { User } from "../../../../api"
-import SearchForm from "../SearchForm/SearchForm"
-import RegisterUserForm from "../RegisterUserForm/RegisterUserForm"
 
 import styles from "./usersComponent.module.css";
 
@@ -41,10 +39,6 @@ const UsersComponent = ({ users }: { users: User[] }) => {
                     </ul>
                 </section>
             ))}
-
-            {<SearchForm />}
-
-            {<RegisterUserForm />}
         </UserContext.Provider>
     )
 }

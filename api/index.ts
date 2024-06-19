@@ -50,7 +50,7 @@ class API {
         return response.json(); // parses JSON response into native JavaScript objects
       }
 
-    private async apiFetch(route: string) {
+    async apiFetch(route: string) {
         const res = await fetch(buildAPIUrl(route), { cache: 'no-cache' })
         if (!res.ok) {
             // This will activate the closest `error.js` Error Boundary
