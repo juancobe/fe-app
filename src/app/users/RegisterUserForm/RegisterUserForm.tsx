@@ -1,17 +1,17 @@
 'use client'
 
-import { Dispatch, FormEventHandler, SetStateAction, useCallback, useMemo, useState } from "react"
+import { Dispatch, FormEventHandler, SetStateAction, useCallback, useContext, useMemo, useState } from "react"
 import api, { User } from "../../../../api"
 import FormField from "../FormField/FormField"
 import Form from "../Form/Form"
+import { UserContext } from "../UsersComponent/UsersComponent"
 
 /**
- * @param setAllUsers - State setter for users to display after successful registration
- * @param allUsers - current list of users displaying
  *  
  * @returns Form to search user by location and event type
  */
-const RegisterUserForm = ({ setAllUsers, allUsers }: { setAllUsers: Dispatch<SetStateAction<User[]>>, allUsers: User[] }) => {
+const RegisterUserForm = () => {
+    const {setAllUsers, allUsers} = useContext(UserContext)
     const [newUserLocation, setNewUserLocation] = useState('')
     const [newUserName, setNewUserName] = useState('')
     const [newUserRates, setNewUserRates] = useState('')

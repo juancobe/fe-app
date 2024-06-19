@@ -1,16 +1,18 @@
 'use client'
 
-import { Dispatch, FormEventHandler, SetStateAction, useCallback, useEffect, useState } from "react"
+import { Dispatch, FormEventHandler, SetStateAction, useCallback, useContext, useEffect, useState } from "react"
 
 import api, { User } from "../../../../api"
 import FormField from "../FormField/FormField"
 import Form from "../Form/Form"
+import { UserContext } from "../UsersComponent/UsersComponent"
 
 /**
  * 
  * @returns Form to search user by location and event type
  */
-const SearchForm = ({ setSearchResult }: { setSearchResult: Dispatch<SetStateAction<User[] | undefined>> }) => {
+const SearchForm = () => {
+    const {setSearchResult} = useContext(UserContext)
     const [searchLocation, setSearchLocation] = useState('')
     const [searchEventType, setSearchEventType] = useState('')
 

@@ -1,6 +1,7 @@
 import React, { act } from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import RegisterUserForm from './RegisterUserForm';
+import { UserContext } from '../UsersComponent/UsersComponent';
 import api, { User } from '@/api';
 import '@testing-library/jest-dom'
 
@@ -8,16 +9,29 @@ jest.mock('../../../../api', () => ({
     registerUser: jest.fn(),
 }));
 
-describe('RegisterUserForm', () => {
-    const mockSetAllUsers = jest.fn();
-    const mockAllUsers: User[] = [];
+const mockSetAllUsers = jest.fn();
+const mockAllUsers: User[] = [];
+const mockSetSearchResult = jest.fn()
 
+const mockContextValue = {
+    setAllUsers: mockSetAllUsers,
+    allUsers: mockAllUsers,
+    setSearchResult: mockSetSearchResult,
+};
+
+const renderWithContext = (component: React.ReactElement) => {
+    return render(
+        <UserContext.Provider value={mockContextValue}>{component}</UserContext.Provider>
+    )
+}
+
+describe('RegisterUserForm', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
     it('renders the form inputs and button', () => {
-        render(<RegisterUserForm setAllUsers={mockSetAllUsers} allUsers={mockAllUsers} />);
+        renderWithContext(<RegisterUserForm />);
 
         expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/location/i)).toBeInTheDocument();
@@ -37,7 +51,7 @@ describe('RegisterUserForm', () => {
 
         (api.registerUser as jest.Mock).mockResolvedValueOnce(newUser);
 
-        render(<RegisterUserForm setAllUsers={mockSetAllUsers} allUsers={mockAllUsers} />);
+        renderWithContext(<RegisterUserForm />);
 
         fireEvent.change(screen.getByLabelText(/name/i), { target: { value: newUser.name } });
         fireEvent.change(screen.getByLabelText(/location/i), { target: { value: newUser.location } });
@@ -58,7 +72,7 @@ describe('RegisterUserForm', () => {
     it('handles form submission errors', async () => {
         (api.registerUser as jest.Mock).mockRejectedValueOnce(new Error);
 
-        render(<RegisterUserForm setAllUsers={mockSetAllUsers} allUsers={mockAllUsers} />);
+        renderWithContext(<RegisterUserForm />);
 
         fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'John Doe' } });
         fireEvent.change(screen.getByLabelText(/location/i), { target: { value: 'NYC' } });
