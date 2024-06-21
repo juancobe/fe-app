@@ -1,10 +1,11 @@
 'use client'
 
-import { Dispatch, FormEventHandler, SetStateAction, useCallback, useContext, useMemo, useState } from "react"
+import { FormEventHandler, useCallback, useContext, useMemo, useState } from "react"
 import api, { User } from "../../../../api"
 import FormField from "../FormField/FormField"
 import Form from "../Form/Form"
 import { UserContext } from "../UsersComponent/UsersComponent"
+import Button from '@mui/material/Button';
 
 /**
  *  
@@ -57,7 +58,8 @@ const RegisterUserForm = () => {
 
             <FormField labelText="Event Types - comma separated, no spaces" id="new-user-event-types" type="text" required value={newUserEventType} onChange={(e) => setNewUserEventType(e.target.value)} />
 
-            <button>Save</button>
+            <Button variant="contained">Save</Button>
+
             {errorMessage ? <p>{errorMessage}</p> : null}
         </Form>
     )
