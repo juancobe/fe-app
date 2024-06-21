@@ -21,43 +21,45 @@ const blankInvoice: ClientInvoice = {
 
 //TODO: Amount field is showing only positive numbers
 const InvoicesWidget = ({ transactions, invoices }: InvoicesWidgetProps) => {
-  const [displayInvoices, setDisplayInvoices] =
-    useState<ClientInvoice[]>(invoices)
+  const { transactions, invoices, threshold } = useContext(DashboardContext)
+
+  //   const [displayInvoices, setDisplayInvoices] =
+  // useState<ClientInvoice[]>(invoices)
 
   const [newInvoice, setNewInvoice] = useState(blankInvoice)
 
   //  TODO: useCallback
-  const hasInvoiceBeenPaid = useCallback(
-    (invoice) => {
-      return transactions.find(
-        (t) =>
-          t.reference === invoice.reference &&
-          t.amount === invoice.amount &&
-          new Date(t.creationDate).getTime() >
-            new Date(invoice.creationDate).getTime(),
-      )
-    },
-    [transactions],
-  )
+  //   const hasInvoiceBeenPaid = useCallback(
+  //     (invoice) => {
+  //       return transactions.find(
+  //         (t) =>
+  //           t.reference === invoice.reference &&
+  //           t.amount === invoice.amount &&
+  //           new Date(t.creationDate).getTime() >
+  //             new Date(invoice.creationDate).getTime(),
+  //       )
+  //     },
+  //     [transactions],
+  //   )
 
-  useEffect(() => {
-    setDisplayInvoices(
-      invoices.map((invoice) => {
-        return {
-          ...invoice,
-          status: hasInvoiceBeenPaid(invoice) ? "PAID" : "NOT PAID",
-        }
-      }),
-    )
-  }, [hasInvoiceBeenPaid, invoices])
+  //   useEffect(() => {
+  //     setDisplayInvoices(
+  //       invoices.map((invoice) => {
+  //         return {
+  //           ...invoice,
+  //           status: hasInvoiceBeenPaid(invoice) ? "PAID" : "NOT PAID",
+  //         }
+  //       }),
+  //     )
+  //   }, [hasInvoiceBeenPaid, invoices])
 
   useEffect(() => {
     console.log("changed display", displayInvoices)
   }, [displayInvoices])
 
-  useEffect(() => {
-    console.log("changed new Invoice", newInvoice)
-  }, [newInvoice])
+  //   useEffect(() => {
+  //     console.log("changed new Invoice", newInvoice)
+  //   }, [newInvoice])
 
   // per invoice, return a form -> invoice fields are the forms fields and then on submit we write into the correct index in display invoices
 
