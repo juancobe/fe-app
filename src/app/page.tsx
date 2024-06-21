@@ -3,11 +3,11 @@ import styles from "./page.module.css";
 import api from "@/api";
 
 export default async function Home() {
-  const users = await api.apiFetch('/')
+  const data = await api.apiFetch('/')
 
   return (
     <main className={styles.main}>
-      {users.message}
+      {data.message}
     </main>
   );
 }

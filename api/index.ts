@@ -1,28 +1,3 @@
-// export type EventType = "Wedding" | "Club" | "Corporate"
-export type EventType = string
-
-
-// export type Location = "NYC" | "LA" | "Chicago"
-export type Location = string
-
-
-export interface User {
-    id: number,
-    name: string,
-    location: Location,
-    rates: number,
-    eventTypes: EventType[]
-    createdAt: string,
-    updatedAt: string
-}
-
-export interface SearchUser {
-    location: Location,
-    eventType: EventType
-}
-
-export interface NewUser extends Omit<User, 'id' | 'createdAt' | 'updatedAt'> {}
-
 export const buildAPIUrl = (route: string) => {
     return `${process.env.NEXT_PUBLIC_SERVER_URL}${route}`
 }
@@ -58,19 +33,6 @@ class API {
         }
 
         return res.json()
-    }
-
-    async fetchAllUsers(): Promise<User[]> {
-        return await this.apiFetch('/users')
-    }
-
-    async registerUser(newUser: NewUser): Promise<User> { 
-        return await this.apiPost('/users/register', newUser)
-    }
-
-    async searchUser(user: SearchUser) {
-        const {location, eventType} = user
-        return await this.apiFetch(`/users/search/${location}/${eventType}`)
     }
 }
 
