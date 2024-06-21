@@ -1,0 +1,28 @@
+{
+  "invoices": [
+    {
+      "clientName": "mom",
+      "creationDate": "Fri Jun 10 2023 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "reference": "332",
+      "amount": 100
+    },
+    {
+      "clientName": "mom",
+      "creationDate": "Fri Jun 10 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "reference": "2",
+      "amount": 100
+    },
+    {
+      "clientName": "dad",
+      "creationDate": "Fri Jun 13 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "reference": "4",
+      "amount": 50
+    },
+    {
+      "clientName": "friend",
+      "creationDate": "Fri Jun 20 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "reference": "5",
+      "amount": 200
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "transactions": [
+    {
+      "creationDate": "Fri Jun 01 2023 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "description": "Initial payment",
+      "reference": "1",
+      "amount": 200
+    },
+    {
+      "creationDate": "Fri Jun 11 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "description": "Books",
+      "reference": "1",
+      "amount": -10
+    },
+    {
+      "creationDate": "Fri Jun 13 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "description": "Payment from mom",
+      "reference": "2",
+      "amount": 100
+    },
+    {
+      "creationDate": "Fri Jun 15 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "description": "Movies",
+      "reference": "3",
+      "amount": 20
+    },
+    {
+      "creationDate": "Fri Jun 21 2024 15:58:02 GMT-0400 (Eastern Daylight Time)",
+      "description": "Payment from dad",
+      "reference": "4",
+      "amount": 50
+    }
+  ]
+}
