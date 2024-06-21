@@ -7,6 +7,13 @@ interface InvoicesWidgetProps {
   invoices: ServerInvoice[]
 }
 
+const blankInvoice: ClientInvoice = {
+  clientName: "",
+  creationDate: "",
+  reference: "",
+  amount: 0,
+}
+
 /**
  * Show list of invoices, with each value modifiable and a way to add a new invoice
  * @returns
@@ -16,6 +23,8 @@ interface InvoicesWidgetProps {
 const InvoicesWidget = ({ transactions, invoices }: InvoicesWidgetProps) => {
   const [displayInvoices, setDisplayInvoices] =
     useState<ClientInvoice[]>(invoices)
+
+  const [newInvoice, setNewInvoice] = useState(blankInvoice)
 
   //  TODO: useCallback
   const hasInvoiceBeenPaid = useCallback(
@@ -46,6 +55,10 @@ const InvoicesWidget = ({ transactions, invoices }: InvoicesWidgetProps) => {
     console.log("changed display", displayInvoices)
   }, [displayInvoices])
 
+  useEffect(() => {
+    console.log("changed new Invoice", newInvoice)
+  }, [newInvoice])
+
   // per invoice, return a form -> invoice fields are the forms fields and then on submit we write into the correct index in display invoices
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,6 +75,17 @@ const InvoicesWidget = ({ transactions, invoices }: InvoicesWidgetProps) => {
       setDisplayInvoices(allInvoices)
     },
     [displayInvoices],
+  )
+
+  const saveNewInvoice = useCallback(
+    (e) => {
+      e.preventDefault()
+      setDisplayInvoices((dinvoices) => {
+        return [...dinvoices, newInvoice]
+      })
+      setNewInvoice(blankInvoice)
+    },
+    [newInvoice],
   )
 
   return (
@@ -102,6 +126,30 @@ const InvoicesWidget = ({ transactions, invoices }: InvoicesWidgetProps) => {
           </>
         )
       })}
+      <h2>Add a new invoice</h2>
+      <form className={styles.form} onSubmit={saveNewInvoice}>
+        {Object.keys(newInvoice).map((field: keyof ClientInvoice, index) => {
+          return (
+            // TODO: convert into a reusable component, insert description
+            <div key={`new-invoice-${field}`}>
+              <label htmlFor={`new-invoice-${field}`} className={styles.label}>
+                {field}:
+              </label>
+              <input
+                type="text"
+                id={`new-invoice-${field}`}
+                value={newInvoice[field]}
+                onChange={(e) =>
+                  setNewInvoice((newInvoice) => {
+                    return { ...newInvoice, [field]: e.target.value }
+                  })
+                }
+              ></input>
+            </div>
+          )
+        })}
+        <button>Save new invoice</button>
+      </form>
     </>
   )
 }
