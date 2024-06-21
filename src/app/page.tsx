@@ -1,13 +1,8 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import api from "@/api";
+import styles from "./page.module.css"
+import api from "@/api"
 
 export default async function Home() {
-  const data = await api.apiFetch('/')
+  const data = await api.apiFetch("/")
 
-  return (
-    <main className={styles.main}>
-      {data.message}
-    </main>
-  );
+  return <main className={styles.main}>{data.message}</main>
 }

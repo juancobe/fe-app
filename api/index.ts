@@ -3,10 +3,6 @@ export const buildAPIUrl = (route: string) => {
 }
 
 class API {
-    private buildAPIUrl(route: string): string {
-        return `something`;
-    }
-
     private async apiPost(route: string, data = {}) {
         // Default options are marked with *
         const response = await fetch(buildAPIUrl(route), {
@@ -36,6 +32,6 @@ class API {
     }
 }
 
-const api = new API()
+const api = new API()   
 
 export default api
